@@ -1,0 +1,44 @@
+<h1>Listing venues</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Free wifi</th>
+      <th>Charging</th>
+      <th>Website</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @venues.each do |venue| %>
+      <tr>
+        <td><%= venue.name %></td>
+        <td><%= venue.free_wifi %></td>
+        <td><%= venue.charging %></td>
+        <td><%= venue.website %></td>
+        <td><%= venue.latitude %></td>
+        <td><%= venue.longitude %></td>
+        <td><%= link_to 'Show', venue %></td>
+        <td><%= link_to 'Edit', edit_venue_path(venue) %></td>
+        <td><%= link_to 'Destroy', venue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Venue', new_venue_path %>
+
+<div class ='gmap'>
+  <div id='gmapuniq'></div>
+</div>
+
+
+

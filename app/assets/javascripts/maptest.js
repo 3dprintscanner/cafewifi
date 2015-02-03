@@ -3,7 +3,7 @@ $(document).ready(function(){
 handler.buildMap({ provider: {}, internal: {id: 'gmapuniq'}}, function(){
   markers = handler.addMarkers([
     {
-      "lat": 0,
+      "lat": 52,
       "lng": 0,
       "picture": {
         "url": "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
@@ -13,7 +13,9 @@ handler.buildMap({ provider: {}, internal: {id: 'gmapuniq'}}, function(){
       "infowindow": "hello!"
     }
   ]);
+  // markers = handler.addMarkers(<%= raw @hash.to_json %>);
   handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
+  console.log("something");
 });
 });

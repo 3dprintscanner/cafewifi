@@ -3,3 +3,52 @@
 <%= render 'form' %>
 
 <%= link_to 'Back', venues_path %>
+
+<div class ='gmap'>
+  <div id='gmapuniq'></div>
+</div>
+
+<div id='location'>This is the location</div>
+
+<script>
+var x = document.getElementById("location");
+function getLocation(){
+	if (navigator.geolocation){
+		navigator.geolocation.getCurrentPosition(showPosition);
+	} else {
+		console.log("geolocation not supported");
+	}
+};
+function showPosition(position){
+	var lat_user = position.coords.latitude;
+	var long_user = position.coords.longitude;
+	latlong = [lat_user,long_user];
+	x.innerHTML = latlong;
+	return latlong
+};
+getLocation();
+
+$(document).ready(function(){
+  handler = Gmaps.build('Google');
+	handler.buildMap({ provider: {}, internal: {id: 'gmapuniq'}}, function(){
+  markers = handler.addMarkers([
+    {
+      "lat": latlong[0],
+      "lng": latlong[1],
+      "picture": {
+        "url": "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
+        "width":  55,
+        "height": 36
+      },
+      "infowindow": "This is my location"
+    }
+  ]);
+  // markers = handler.addMarkers(<%= raw @hash.to_json %>);
+  handler.bounds.extendWith(markers);
+  handler.fitMapToBounds();
+  console.log("something");
+});
+});
+</script>
+
+

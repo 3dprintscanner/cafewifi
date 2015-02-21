@@ -31,6 +31,10 @@ gem 'gmaps4rails'
 gem 'underscore-rails'
 gem 'lodash-rails'
 
+# Add bootstrap css styles
+
+gem 'bootstrap-sass', '~> 3.3.3'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

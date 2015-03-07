@@ -4,11 +4,17 @@ class VenuesController < ApplicationController
   # GET /venues
   # GET /venues.json
   def index
-    @venues = Venue.all
+    #@venues = Venue.all
+    @venues = Venue.search(params[:search])
     @hash = Gmaps4rails.build_markers(@venues) do |venues, marker|
       marker.lat venues.latitude
       marker.lng venues.longitude
+
     end
+
+  end
+
+  def find
 
   end
 
@@ -74,6 +80,6 @@ class VenuesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def venue_params
-      params.require(:venue).permit(:name, :free_wifi, :charging, :website, :latitude, :longitude)
+      params.require(:venue).permit(:name, :free_wifi, :charging, :website, :latitude, :longitude, :address, :search, :prettyaddress)
     end
 end

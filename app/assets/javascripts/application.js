@@ -12,8 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require turbolinks
 //= require gmaps/google
 //= require underscore
 //= require maptest
+//= require cafewifi_autocomplete
 //= require_tree .

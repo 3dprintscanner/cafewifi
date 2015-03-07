@@ -2,46 +2,32 @@
 <br>
 <%= link_to 'New Venue', new_venue_path %>
 <div class ="row">
-  <div class='col-md-3'>
-    <h3>Search for a wifi location near you</h3>
-    <input type="search" name="location-search" id="location-input" class="form-control" value="" required="required" title="Find Places">
-    <button type="button" class="btn btn-default" onclick="codeAddress()">Search</button>
-    <h4><%= link_to 'New Venue', new_venue_path %></h4>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Free wifi</th>
-          <th>Charging</th>
-          <th>Website</th>
-          <th>Latitude</th>
-          <th>Longitude</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @venues.each do |venue| %>
-          <tr>
-            <td><%= venue.name %></td>
-            <td><%= venue.free_wifi %></td>
-            <td><%= venue.charging %></td>
-            <td><%= venue.website %></td>
-            <td><%= venue.latitude %></td>
-            <td><%= venue.longitude %></td>
-            <td><%= link_to 'Show', venue %></td>
-            <td><%= link_to 'Edit', edit_venue_path(venue) %></td>
-            <td><%= link_to 'Destroy', venue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <div class='col-md-3'> 
+ <%= render 'search' %>
+    <div class="resultcontainer">
+      <% @venues.each do |venue| %>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="thumbnail">
+            <img data-src="#" alt="">
+            <div class="caption">
+              <h3><%= venue.name %></h3>
+              <ul>
+                <li> <%= venue.free_wifi %></li>
+                <li> <%= venue.charging %> </li>
+                <li> <%= venue.website %> </li>
+                <li> <%= venue.address %> </li>
+                <li> <%= venue.address_line_2 %> </li>
+                <li> <%= venue.postcode %> </li>
+              </ul>
+                <%= link_to "Go To Detail", venue_path(venue.id), class: "btn btn-default" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
 
   </div>
-  <div class="col-md-"><div class ='gmap'>
+  <div class="col-md-9"><div class ='gmap'>
       <div id='gmapuniq'></div>
   </div>
   </div>
@@ -92,6 +78,28 @@ $(document).ready(function(){
         alert('Geocode was not successful for the following reason: ' + status);
       }
     });
+  }
+
+  function autoComplete(){
+    var query = document.getElementById('location-input').value;
+    geocoder.geocode({'address': query}, function(results, status){
+      if (status == google.maps.GeocoderStatus.OK){
+        choices = [];
+        for (var i = results.length - 1; i >= 0; i--) {
+          choices.push(results[i].formatted_address);
+        };
+        console.log(choices);
+        trial = ["one","two","three"];
+        console.log(trial);
+        // completebox = document.getElementById("location-input");
+        completebox = $('#location-input');
+        // completebox.autocomplete("enable");
+        completebox.autocomplete({source: choices});
+        console.log('choices');      
+        // completebox.autocomplete({source: trial});
+      }
+    })
+
   }
 
 </script>

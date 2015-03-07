@@ -1,0 +1,19 @@
+<!-- here is the markup for the search box -->
+
+<!-- <div class='searchcontainer'>
+	<h3>Search for a wifi location near you</h3>
+	    <input type="search" name="location-search" id="location-input" oninput="autoComplete()" class="form-control" value="" required="required" title="Find Places">
+	    <h4>Radius</h4>
+	    <input type="number" name="location-radius" id="inputLocation-Radius" class="form-control" value="" min="2" max="" step="1" required="required" title="">
+	    <button type="button" class="btn btn-default" onclick="codeAddress()">Search</button>
+	    <h4><%= link_to 'New Venue', new_venue_path %></h4>
+</div>
+ -->
+
+<%= form_tag venues_path, :method => 'get' do %>
+<p>
+	<%= text_field_tag :search, params[:search], class:"form-control" %>
+	<%= submit_tag "Search", :name => nil %>
+</p>
+<% end %>
+asdasdas

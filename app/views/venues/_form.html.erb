@@ -20,6 +20,10 @@
     <%= f.check_box :free_wifi %>
   </div>
   <div class="field">
+    <%= f.label :address %><br>
+    <input type="search" name="venue[address]" id="location-input" oninput="autoComplete()" class="form-control" value="" required="required" title="Find Places">
+  </div>
+  <div class="field">
     <%= f.label :charging %><br>
     <%= f.check_box :charging %>
   </div>
@@ -27,15 +31,15 @@
     <%= f.label :website %><br>
     <%= f.text_field :website %>
   </div>
-  <div class="field">
+  <!-- <div class="field">
     <%= f.label :latitude %><br>
     <%= f.text_field :latitude %>
   </div>
   <div class="field">
     <%= f.label :longitude %><br>
     <%= f.text_field :longitude %>
-  </div>
+  </div> -->
   <div class="actions">
     <%= f.submit %>
-  </div>
+  </div>  
 <% end %>

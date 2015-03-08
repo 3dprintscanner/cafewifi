@@ -8,9 +8,15 @@ class Venue < ActiveRecord::Base
 			#Venue.where("name LIKE ? OR address LIKE ?", search, search)
 			Venue.near(search)
 		else
-			find(:all)
+			Venue.all
 		end
 	end
 
+	def self.add_from_rake(params)
+		Venue.new(params)
+	end
+	def self.try
+		puts 'test text'
+	end
 
 end

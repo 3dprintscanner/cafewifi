@@ -12,8 +12,52 @@
 
 <%= form_tag venues_path, :method => 'get' do %>
 <p>
-	<%= text_field_tag :search, params[:search], class:"form-control" %>
+	<%= text_field_tag :search, params[:search], class:"form-control", oninput:"autoComplete2()" %>
 	<%= submit_tag "Search", :name => nil %>
 </p>
 <% end %>
-asdasdas
+
+<script>
+ function codeAddress() {
+    // var geocoder
+    // geocoder = new google.maps.Geocoder();
+    console.log(handler);
+    // handler = Gmaps.build('Google');
+    var address = document.getElementById('search').value;
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        console.log(results);
+        handler.getMap().setCenter(results[0].geometry.location);
+        // var marker = new google.maps.Marker({
+        //     map: handler.getMap(),
+        //     position: results[0].geometry.location
+        // });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+
+  function autoComplete2(){
+    var query = document.getElementById('search').value;
+    geocoder.geocode({'address': query}, function(results, status){
+      if (status == google.maps.GeocoderStatus.OK){
+        choices = [];
+        for (var i = results.length - 1; i >= 0; i--) {
+          choices.push(results[i].formatted_address);
+        };
+        console.log(choices);
+        trial = ["one","two","three"];
+        console.log(trial);
+        // completebox = document.getElementById("location-input");
+        completebox = $('#search');
+        // completebox.autocomplete("enable");
+        completebox.autocomplete({source: choices});
+        console.log('choices');      
+        // completebox.autocomplete({source: trial});
+      }
+    })
+
+  }
+
+ </script>

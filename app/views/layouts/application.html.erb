@@ -21,8 +21,16 @@
 		<li>
 			<a href="#">My Account</a>
 		</li>
+		<li>
+			<% flash.each do |type, message| %>
+  				<%= content_tag :div, message, :class => "flash #{type}" %>
+			<% end %>
+		</li>
 	</ul>
 </nav>
+<% flash.each do |type, message| %>
+  	<%= content_tag :div, message, :class => "flash #{type}" %>
+<% end %>
 <br>
 <br>
 <%= yield %>

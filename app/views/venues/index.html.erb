@@ -69,10 +69,10 @@ $(document).ready(function(){
       if (status == google.maps.GeocoderStatus.OK) {
         console.log(results);
         handler.getMap().setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-            map: handler.getMap(),
-            position: results[0].geometry.location
-        });
+        // var marker = new google.maps.Marker({
+        //     map: handler.getMap(),
+        //     position: results[0].geometry.location
+        // });
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
       }

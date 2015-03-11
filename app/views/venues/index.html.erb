@@ -5,7 +5,7 @@
  <%= render 'search' %>
     <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">There are <%= @venues.length %> Venues near <%= @searchlocation %></h3>
+          <h3 class="panel-title">There are <%= @venues.length %> Venues <%= @search_place %></h3>
         </div>
         <div class="panel-body">
           <div class="resultcontainer">
@@ -23,7 +23,7 @@
                           <li> <%= venue.address_line_2 %> </li>
                           <li> <%= venue.postcode %> </li>
                         </ul>
-                          <%= link_to "Go To Detail", venue_path(venue.id), class: "btn btn-default" %>
+                          <%= link_to "Go To Venue Details Page", venue_path(venue.id), class: "btn btn-default" %>
                           <button type="button" class="btn btn-default" onClick="centerMap(<%= venue.longitude %>,<%= venue.latitude %>,handler)">Center on Venue</button>
                       </div>
                     </div>

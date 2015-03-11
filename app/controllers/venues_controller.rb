@@ -15,6 +15,8 @@ class VenuesController < ApplicationController
 
     end
     @searchlocation = params[:search]
+    @search_place = search_text
+
   end
 
   def find
@@ -80,7 +82,13 @@ class VenuesController < ApplicationController
     def set_venue
       @venue = Venue.find(params[:id])
     end
-
+    def search_text
+      if !params[:search]
+         return
+      else
+         return "Near #{params[:search].to_s}"
+      end
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def venue_params
       params.require(:venue).permit(:name, :free_wifi, :charging, :website, :latitude, :longitude, :address, :search, :prettyaddress, :address_line_2, :postcode)

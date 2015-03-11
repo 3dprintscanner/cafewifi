@@ -1,7 +1,8 @@
 class Venue < ActiveRecord::Base
 	geocoded_by :address
 	after_validation :geocode
-
+	has_many :reviews
+	
 	def self.search(search)
 		if search
 			# find(:all, :conditions => ['name LIKE ? OR address LIKE ?', "%#{search}%" ])
@@ -12,9 +13,6 @@ class Venue < ActiveRecord::Base
 		end
 	end
 
-	def self.add_from_rake(params)
-		Venue.new(params)
-	end
 	def self.try
 		puts 'test text'
 	end

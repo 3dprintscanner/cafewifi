@@ -1,4 +1,8 @@
 Cafewifi::Application.routes.draw do
+  resources :users
+
+  resources :reviews
+
   resources :venues
 
 

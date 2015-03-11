@@ -33,6 +33,49 @@
   <strong>Address:</strong>
   <%= @venue.address %>
 </p>
+  <strong>Reviews:</strong>
+<ul>
+  <% @venue.reviews.each do |review| %>
+    <li><%= review.review_body %></li>
+    <% end %>
+</ul>
+
+<%= link_to "Write a Review", new_review_path %>
+
+<div class="row">
+<div class='col-md-9'>
+    <div class ='gmap'>
+      <div id='gmapuniq'></div>
+    </div>
+    <div id='location'>This is the location</div>
+  </div>
+</div>
+<br>
+<br>
 
 <%= link_to 'Edit', edit_venue_path(@venue) %> |
 <%= link_to 'Back', venues_path %>
+<script>
+
+$(document).ready(function(){
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'gmapuniq'}}, function(){
+  markers = handler.addMarkers([
+    {
+      "lat": <%= @venue.latitude %>,
+      "lng": <%= @venue.longitude %>,
+      "picture": {
+        "url": "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
+        "width":  55,
+        "height": 36
+      },
+      "infowindow": "This is my location"
+    }
+  ]);
+  // markers = handler.addMarkers(<%= raw @hash.to_json %>);
+  handler.bounds.extendWith(markers);
+  handler.fitMapToBounds();
+  console.log("something");
+});
+});
+</script>

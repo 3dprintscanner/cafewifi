@@ -14,7 +14,7 @@ class VenuesController < ApplicationController
       marker.lng venues.longitude
 
     end
-
+    @searchlocation = params[:search]
   end
 
   def find

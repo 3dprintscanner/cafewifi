@@ -13,14 +13,13 @@
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<a class="navbar-brand" href="#">CafeWifi</a>
+	<%= link_to "CafeWifi", venues_path, :class => "navbar-brand" %>
 	<ul class="nav navbar-nav">
 		<li class="active">
 			<%= link_to 'Home', venues_path %>
 		</li>
 		<li>
-			<a href="#">My Account</a>
-		</li>
+			<%= link_to "My Account", users_path %>
 		<li>
 			<% flash.each do |type, message| %>
   				<%= content_tag :div, message, :class => "flash #{type}" %>

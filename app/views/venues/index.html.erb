@@ -3,28 +3,36 @@
 <div class ="row">
   <div class='col-md-3'> 
  <%= render 'search' %>
-    <div class="resultcontainer">
-      <% @venues.each do |venue| %>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <div class="thumbnail">
-            <img data-src="#" alt="">
-            <div class="caption">
-              <h3><%= venue.name %></h3>
-              <ul>
-                <li> <%= venue.free_wifi %></li>
-                <li> <%= venue.charging %> </li>
-                <li> <%= venue.website %> </li>
-                <li> <%= venue.address %> </li>
-                <li> <%= venue.address_line_2 %> </li>
-                <li> <%= venue.postcode %> </li>
-              </ul>
-                <%= link_to "Go To Detail", venue_path(venue.id), class: "btn btn-default" %>
-            </div>
-          </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">There are <%= @venues.length %> Venues near <%= @searchlocation %></h3>
         </div>
-      <% end %>
-    </div>
+        <div class="panel-body">
+          <div class="resultcontainer">
+                <% @venues.each do |venue| %>
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="thumbnail">
+                      <img data-src="#" alt="">
+                      <div class="caption">
+                        <h3><%= venue.name %></h3>
+                        <ul>
+                          <li> <%= venue.free_wifi %></li>
+                          <li> <%= venue.charging %> </li>
+                          <li> <%= venue.website %> </li>
+                          <li> <%= venue.address %> </li>
+                          <li> <%= venue.address_line_2 %> </li>
+                          <li> <%= venue.postcode %> </li>
+                        </ul>
+                          <%= link_to "Go To Detail", venue_path(venue.id), class: "btn btn-default" %>
+                          <button type="button" class="btn btn-default" onClick="centerMap(<%= venue.longitude %>,<%= venue.latitude %>,handler)">Center on Venue</button>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
 
+        </div>
+    </div>
   </div>
   <div class="col-md-9"><div class ='gmap'>
       <div id='gmapuniq'></div>
@@ -59,6 +67,15 @@ $(document).ready(function(){
   //   });
 
   // };
+
+  function centerMap(longitude, latitude, handler){ 
+    // handler.panTo({lat: 22, lng: 32});
+    console.log(longitude);
+    console.log(latitude);
+    handler.map.centerOn(new google.maps.LatLng(latitude, longitude));
+    console.log("calling the centermap function");
+
+  }
   function codeAddress() {
     // var geocoder
     // geocoder = new google.maps.Geocoder();

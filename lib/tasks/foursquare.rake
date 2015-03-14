@@ -84,7 +84,7 @@ namespace :foursquare do
   
   desc "TODO"
     desc "testing encapsulated http requests"
-  task test_task: :environment do
+  task simple_city_find: :environment do
   	if CGI::escape(ENV['CITY'])
   		split = CGI::escape(ENV['CITY'])
   	else

@@ -1,8 +1,10 @@
 <br>
 <%= link_to 'New Venue', new_venue_path %>
 <div class ="row">
-  <div class='col-md-3'> 
- <%= render 'search' %>
+  <div class='col-md-3'>
+    <div class="row">
+      <%= render 'search' %>  
+    </div>
     <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">There are <%= @venues.length %> Venues <%= @search_place %></h3>
@@ -72,10 +74,17 @@ $(document).ready(function(){
     // handler.panTo({lat: 22, lng: 32});
     console.log(longitude);
     console.log(latitude);
+
+
     handler.map.centerOn(new google.maps.LatLng(latitude, longitude));
     console.log("calling the centermap function");
+    handler.buildMap({ provider: {zoom: 16}, internal: {id: 'gmapuniq'}}, function(){
+       markers = handler.addMarkers(<%= raw @hash.to_json %>);
+       handler.map.centerOn(new google.maps.LatLng(latitude, longitude));
+    });
 
   }
+
   function codeAddress() {
     // var geocoder
     // geocoder = new google.maps.Geocoder();

@@ -1,6 +1,9 @@
 class Venue < ActiveRecord::Base
+	
+	validates :name, presence: true
+
 	geocoded_by :address
-	after_validation :geocode
+	after_validation :geocode, if: ->(obj){ !obj.longitude.present? || !obj.latitude.present?}
 	has_many :reviews
 	
 	def self.search(search)
@@ -13,8 +16,6 @@ class Venue < ActiveRecord::Base
 		end
 	end
 
-	def self.try
-		puts 'test text'
-	end
+	
 
 end

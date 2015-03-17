@@ -1,6 +1,11 @@
 class Venue < ActiveRecord::Base
 	
 	validates :name, presence: true
+	# validates :website, length: {minimum: 5}
+	validates :latitude, presence: true
+	validates :longitude, presence: true
+	validates :latitude, uniqueness: true
+	validates :longitude, uniqueness: true
 
 	geocoded_by :address
 	after_validation :geocode, if: ->(obj){ !obj.longitude.present? || !obj.latitude.present?}

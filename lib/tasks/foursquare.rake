@@ -102,7 +102,7 @@ namespace :foursquare do
   		end
 
   		def getFoursquare
-  			response = HTTParty.get(@base_string = "https://api.foursquare.com/v2/venues/explore?near=#{@target}&query=free%20wifi&v=20140808&client_id=XQFBFGAVUQIULDWR2RMRKJD2G3Y21I325C0ZW3AS1UF1KKRQ&client_secret=YIBXDFRLHD5T4PUKPDVRS21W0OHDYDZ4IL1G3URNFZSQY3S3")	
+  			response = HTTParty.get(@base_string = "https://api.foursquare.com/v2/venues/explore?near=#{@target}&limit=50&query=free%20wifi&v=20140808&client_id=XQFBFGAVUQIULDWR2RMRKJD2G3Y21I325C0ZW3AS1UF1KKRQ&client_secret=YIBXDFRLHD5T4PUKPDVRS21W0OHDYDZ4IL1G3URNFZSQY3S3")	
   		  	JSON.parse(response.body)
   		end
   	end
@@ -134,8 +134,77 @@ namespace :foursquare do
 			# prettyaddress.flatten!
 			Venue.create({name: name, free_wifi: true, address: addressline1, address_line_2: addressline2, postcode: postcode, latitude: latitude, longitude: longitude})
 		end
+  end
 
+  desc "Add data from multiple cities in a source file"
+    
+  task find_all_cities: :environment do
+  	require 'json'
 
+  	cities_reference = File.read("#{Rails.root}/public/testarray.json")
+  	newcity = JSON.parse(cities_reference)
+  	# puts newcity
+  	# cities_reference_cut = newcity.first(5)
+  	cities_reference_cut = newcity
+  	puts cities_reference_cut
 
+  	puts cities_reference_cut[0]
+  	
+  	
+
+  	def self.get_city(split)
+	  	wifi = SquareRequest.new(split)
+	  	wifi = wifi.getFoursquare
+	  	if wifi == nil
+	  		raise 'parse error'
+	  	end
+	  	toadd = []
+			results = wifi['response']['groups'][0]["items"]
+			# puts results
+			puts 'completed task'
+			# puts results.size
+			results.each do |item|
+				name = item["venue"]["name"]
+				addressline1 = item["venue"]["location"]["address"]
+				addressline2 = item["venue"]["location"]["crossStreet"]
+				postcode = item["venue"]["location"]["postalCode"]
+				free_wifi = true 
+				latitude = item["venue"]["location"]["lat"]
+				longitude = item["venue"]["location"]["lng"]
+				prettyaddress = item["venue"]["location"]["formattedAddress"]
+				prettyaddress = prettyaddress.flatten!
+				Venue.create({name: name, free_wifi: true, address: addressline1, address_line_2: addressline2, postcode: postcode, latitude: latitude, longitude: longitude, prettyaddress: prettyaddress})
+			end
+		sleep(1)
+	end
+		class SquareRequest
+			include HTTParty
+			require 'json'
+			# @base_string = "https://api.foursquare.com/v2/venues/explore?near=washington&query=free%20wifi&v=20140808&client_id=XQFBFGAVUQIULDWR2RMRKJD2G3Y21I325C0ZW3AS1UF1KKRQ&client_secret=YIBXDFRLHD5T4PUKPDVRS21W0OHDYDZ4IL1G3URNFZSQY3S3"
+
+			def initialize(target)
+			  	@target=target
+			  	# @longitude = longitude
+			  	# @latitude = latitude
+
+			end
+
+			def getFoursquare
+				response = HTTParty.get(@base_string = "https://api.foursquare.com/v2/venues/explore?near=#{@target}&limit=50&query=free%20wifi&v=20140808&client_id=XQFBFGAVUQIULDWR2RMRKJD2G3Y21I325C0ZW3AS1UF1KKRQ&client_secret=YIBXDFRLHD5T4PUKPDVRS21W0OHDYDZ4IL1G3URNFZSQY3S3")	
+			  	JSON.parse(response.body)
+			end
+
+			def getFourSquareByLatlng(latlngstring)
+				latlng = latlngstring
+				response = HTTParty.get("https://api.foursquare.com/v2/venues/explore?ll=#{latlng}&limit=50&query=free%20wifi&v=20140808&client_id=XQFBFGAVUQIULDWR2RMRKJD2G3Y21I325C0ZW3AS1UF1KKRQ&client_secret=YIBXDFRLHD5T4PUKPDVRS21W0OHDYDZ4IL1G3URNFZSQY3S3")
+			end
+		end
+	# # get_city(cities_reference_cut[0]["city"])
+	# cities_reference_cut.each do |city|
+ #  		get_city(city["city"])
+ #  	end
+  	cities_reference_cut.each do |city|
+  		get_city(city['ll'])
+  	end
   end
 end

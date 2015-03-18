@@ -35,17 +35,21 @@ describe Venue do
   			expect(venue).to_not be_valid
   		end
 
-  		it "should reject an entry with no website" do
-  			venue.website = ""
-  			expect(venue).to_not be_valid
-  			
-  		end
-
   		it "should reject an entry with neither longitude nor latitude" do
   			venue.latitude = nil
   			venue.longitude = nil
   			expect(venue).to_not be_valid
   		end
+
+      it "should only return the first 50 with a limit parameter" do
+        3.times do |lat|
+          valid_attributes['latitude'] =+ (lat*0.1)
+          valid_attributes['longitude'] =+ (lat*0.1)
+          Venue.create(valid_attributes)
+        end
+          puts Venue.all.to_json
+          expect(Venue.search('Liverpool',1).count).to eq(1)
+      end
   	end
   end
 

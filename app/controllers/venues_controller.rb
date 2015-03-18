@@ -9,6 +9,12 @@ class VenuesController < ApplicationController
     if (@venues.length == 0)
       redirect_to venues_path, notice: 'No places match your query'
     end
+    # puts @venues
+    # if (@venues.length >= 50)
+    #   @venues = @venues.first(50)
+    #   puts @venues.count
+    # end
+
     @hash = Gmaps4rails.build_markers(@venues) do |venues, marker|
       marker.lat venues.latitude
       marker.lng venues.longitude
@@ -91,6 +97,6 @@ class VenuesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def venue_params
-      params.require(:venue).permit(:name, :free_wifi, :charging, :website, :latitude, :longitude, :address, :search, :prettyaddress, :address_line_2, :postcode)
+      params.require(:venue).permit(:name, :free_wifi, :charging, :website, :latitude, :longitude, :address, :search, :prettyaddress, :address_line_2, :postcode, :offset, :page)
     end
 end

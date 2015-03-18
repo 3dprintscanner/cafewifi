@@ -11,16 +11,16 @@ class Venue < ActiveRecord::Base
 	after_validation :geocode, if: ->(obj){ !obj.longitude.present? || !obj.latitude.present?}
 	has_many :reviews
 	
-	def self.search(search)
+	def self.search(search,limit=50)
+		
 		if search
 			# find(:all, :conditions => ['name LIKE ? OR address LIKE ?', "%#{search}%" ])
 			#Venue.where("name LIKE ? OR address LIKE ?", search, search)
-			Venue.near(search)
+			# Venue.near(search)
+			Venue.near(search).first(limit)
 		else
 			Venue.all
 		end
 	end
-
-	
 
 end

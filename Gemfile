@@ -47,6 +47,10 @@ gem 'httparty'
 
 gem 'bootstrap-sass', '~> 3.3.3'
 
+# Add pagination gem 
+
+gem 'kaminari'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -56,6 +60,7 @@ group :development, :test do
 	gem 'capybara'
 	gem 'rspec-rails'
 	gem 'shoulda-matchers'
+	# gem 'factory-girl'
 end
 
 

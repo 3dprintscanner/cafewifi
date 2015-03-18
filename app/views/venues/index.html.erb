@@ -11,26 +11,7 @@
         </div>
         <div class="panel-body">
           <div class="resultcontainer">
-                <% @venues.each do |venue| %>
-                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="thumbnail">
-                      <img data-src="#" alt="">
-                      <div class="caption">
-                        <h3><%= venue.name %></h3>
-                        <ul>
-                          <li> <%= venue.free_wifi %></li>
-                          <li> <%= venue.charging %> </li>
-                          <li> <%= venue.website %> </li>
-                          <li> <%= venue.address %> </li>
-                          <li> <%= venue.address_line_2 %> </li>
-                          <li> <%= venue.postcode %> </li>
-                        </ul>
-                          <%= link_to "Go To Venue Details Page", venue_path(venue.id), class: "btn btn-default" %>
-                          <button type="button" class="btn btn-default" onClick="centerMap(<%= venue.longitude %>,<%= venue.latitude %>,handler)">Center on Venue</button>
-                      </div>
-                    </div>
-                  </div>
-                <% end %>
+                <%= render 'venues' , venues: @venues %>
               </div>
 
         </div>

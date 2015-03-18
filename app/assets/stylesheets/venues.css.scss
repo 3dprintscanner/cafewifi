@@ -21,3 +21,31 @@
 	// max-height: 100%;
 	overflow-y: scroll;
 }
+
+.app-icon {
+	float: right;
+	padding: 15px;
+	top: 1em;
+	transform: scale(1.6);
+}
+
+
+.venue-header {
+
+	float: left;
+	padding-left: 1em;
+}
+
+.contentcontainer{
+	width:97%;
+	max-width: 2000px;
+	margin-left: auto;
+	margin-right: auto;
+
+
+}
+
+.searchbox {
+
+	padding: 15px;
+}

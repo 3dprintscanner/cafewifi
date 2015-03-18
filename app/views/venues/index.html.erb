@@ -1,28 +1,33 @@
 <br>
-<%= link_to 'New Venue', new_venue_path %>
-<div class ="row">
-  <div class='col-md-3'>
-    <div class="row">
-      <%= render 'search' %>  
+<div class="contentcontainer">
+  <%= link_to 'New Venue', new_venue_path %>
+  <div class ="row">
+    <div class='col-md-3'>
+      <div class="row searchbox">
+        <%= render 'search' %>  
+      </div>
+      <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= @search_presentation_string %></h3>
+          </div>
+          <div class="panel-heading">
+            <%= link_to 'Download Local Venues', venues_path(params.merge({format: "json"})), class: "btn btn-warning" %>
+          </div>
+          <div class="panel-body">
+            <%= paginate @venues %>
+            <div class="resultcontainer">
+                  <%= render 'venues' , venues: @venues %>
+                </div>
+          </div>
+      </div>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title"><%= @search_presentation_string %></h3>
-        </div>
-        <div class="panel-body">
-          <%= paginate @venues %>
-          <div class="resultcontainer">
-                <%= render 'venues' , venues: @venues %>
-              </div>
-
-        </div>
+    <div class="col-md-9"><div class ='gmap'>
+        <div id='gmapuniq'></div>
     </div>
-  </div>
-  <div class="col-md-9"><div class ='gmap'>
-      <div id='gmapuniq'></div>
-  </div>
-  </div>
+    </div>
+  </div>  
 </div>
+
 <script>
 $(document).ready(function(){
   // var geocoder;

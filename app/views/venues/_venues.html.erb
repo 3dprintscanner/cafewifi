@@ -3,18 +3,31 @@
                     <div class="thumbnail">
                       <img data-src="#" alt="">
                       <div class="caption">
-                        <h3><%= venue.name %></h3>
-                        <ul>
-                          <li> <%= venue.free_wifi %></li>
-                          <li> <%= venue.charging %> </li>
-                          <li> <%= venue.website %> </li>
-                          <li> <%= venue.address %> </li>
-                          <li> <%= venue.address_line_2 %> </li>
-                          <li> <%= venue.postcode %> </li>
-                          <li> <%= venue.distance_to(params[:search]).round(3) %> </li>
-                        </ul>
-                          <%= link_to "Go To Venue Details Page", venue_path(venue.id), class: "btn btn-default" %>
-                          <button type="button" class="btn btn-default" onClick="centerMap(<%= venue.longitude %>,<%= venue.latitude %>,handler)">Center on Venue</button>
+                        <div class="row">
+                          <h3 class="venue-header"><%= venue.name %></h3>
+                          <% if venue.free_wifi == true %>
+                            <span class="glyphicon glyphicon-check app-icon"></span>
+                          <% end %>
+                          <% if venue.charging == true %>
+                            <span class="glyphicon glyphicon-flash app-icon"></span>
+                          <% end %>
+                        </div>
+                        <div class="row">
+                          
+                          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                            <span><h4>Website:</h4><p><%= venue.website %></p></span>
+                            
+                            <span><h4>Address:</h4><p><%= venue.address %></p></span>
+                            
+                            <p><%= venue.address_line_2 %></p>
+                            <p><%= venue.postcode %></p>
+                            <span><h4>Distance To:</h4></span>
+                            <!-- <p><%= venue.distance_to(params[:search]).round(3) %></p> -->
+                            1
+                          </div>
+                        </div>
+                          <%= link_to "Go To Venue Details", venue_path(venue.id), class: "btn btn-info" %>
+                          <button type="button" class="btn btn-primary" onClick="centerMap(<%= venue.longitude %>,<%= venue.latitude %>,handler)">Center on Venue</button>
                       </div>
                     </div>
                   </div>

@@ -12,10 +12,19 @@
 
 <%= form_tag venues_path, :method => 'get' do %>
 <p>
-	<%= text_field_tag :search, params[:search], class:"form-control", oninput:"autoComplete2()" %>
-  <%= select_tag :per, options_for_select([10,25,50,100,500,"all"]) %>
-	<%= submit_tag "Search", :name => nil %>
-  <%= link_to "Clear Search", venues_path %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <%= text_field_tag :search, params[:search], class:"form-control", oninput:"autoComplete2()" %>  
+    </div>   
+  </div>
+  <br>
+  <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><%= select_tag :per, options_for_select([10,25,50,100,500,"all"]), {class: "form-control"} %></div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <%= submit_tag "Search", :name => nil, class:"btn btn-primary" %>
+        <%= link_to "Clear Search", venues_path, class: "btn btn-warning" %>
+      </div>  
+  </div>
 </p>
 <% end %>
 

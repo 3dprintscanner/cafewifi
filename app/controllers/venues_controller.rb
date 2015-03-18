@@ -5,24 +5,26 @@ class VenuesController < ApplicationController
   # GET /venues.json
   def index
     #@venues = Venue.all
-    @venues = Venue.search(params[:search])
-    if (@venues.length == 0)
-      redirect_to venues_path, notice: 'No places match your query'
+    if params[:per]== "all"
+      params[:per] = Venue.all.count
     end
-    # puts @venues
-    # if (@venues.length >= 50)
-    #   @venues = @venues.first(50)
-    #   puts @venues.count
-    # end
-
+    @venues = Venue.nearby_places(params[:search]).page(params[:page]).per(params[:per])
+    
     @hash = Gmaps4rails.build_markers(@venues) do |venues, marker|
       marker.lat venues.latitude
       marker.lng venues.longitude
-
     end
-    @searchlocation = params[:search]
-    @search_place = search_text
+    # @searchlocation = params[:search]
+    # @search_place = search_text
+    @search_presentation_string = search_text
 
+    respond_to do |format|
+      if (@venues.length == 0)
+      format.html {redirect_to venues_path, notice: 'No places match your query'}
+      end
+      format.html
+      format.json {render :json => @venues}
+    end 
   end
 
   def find
@@ -90,9 +92,9 @@ class VenuesController < ApplicationController
     end
     def search_text
       if !params[:search]
-         return
+         return "There are #{Venue.all.count} Venues in total"
       else
-         return "Near #{params[:search].to_s}"
+         return "There are #{Venue.near(params[:search]).count} Venues Near #{params[:search].to_s}"
       end
     end
     # Never trust parameters from the scary internet, only allow the white list through.

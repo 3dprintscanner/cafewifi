@@ -7,9 +7,10 @@
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">There are <%= @venues.length %> Venues <%= @search_place %></h3>
+          <h3 class="panel-title"><%= @search_presentation_string %></h3>
         </div>
         <div class="panel-body">
+          <%= paginate @venues %>
           <div class="resultcontainer">
                 <%= render 'venues' , venues: @venues %>
               </div>

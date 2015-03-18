@@ -1,52 +1,62 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @venue.name %>
-</p>
 
-<p>
-  <strong>Free wifi:</strong>
-  <%= @venue.free_wifi %>
-</p>
+<div class="container">
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <p>
+    <strong>Name:</strong>
+    <%= @venue.name %>
+  </p>
 
-<p>
-  <strong>Charging:</strong>
-  <%= @venue.charging %>
-</p>
+  <p>
+    <strong>Free wifi:</strong>
+    <%= @venue.free_wifi %>
+  </p>
 
-<p>
-  <strong>Website:</strong>
-  <%= @venue.website %>
-</p>
+  <p>
+    <strong>Charging:</strong>
+    <%= @venue.charging %>
+  </p>
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @venue.latitude %>
-</p>
+  <p>
+    <strong>Website:</strong>
+    <%= @venue.website %>
+  </p>
 
-<p>
-  <strong>Longitude:</strong>
-  <%= @venue.longitude %>
-</p>
-<p>
-  <strong>Address:</strong>
-  <%= @venue.address %>
-</p>
-  <strong>Reviews:</strong>
-<ul>
-  <% @venue.reviews.each do |review| %>
-    <li><%= review.review_body %></li>
-    <% end %>
-</ul>
+  <p>
+    <strong>Latitude:</strong>
+    <%= @venue.latitude %>
+  </p>
+
+  <p>
+    <strong>Longitude:</strong>
+    <%= @venue.longitude %>
+  </p>
+  <p>
+    <strong>Address:</strong>
+    <%= @venue.address %>
+  </p>
+    <strong>Reviews:</strong>
+  <ul>
+    <% @venue.reviews.each do |review| %>
+      <li><%= review.review_body %></li>
+      <% end %>
+  </ul>
+      </div>
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <div class="row">
+        <div class ='gmap'>
+          <div id='gmapuniq'></div>
+        </div>    
+                </div></div>    
+</div>
+
 
 <%= link_to "Write a Review", new_review_path %>
 
 <div class="row">
 <div class='col-md-9'>
-    <div class ='gmap'>
-      <div id='gmapuniq'></div>
-    </div>
+    
     <div id='location'>This is the location</div>
   </div>
 </div>

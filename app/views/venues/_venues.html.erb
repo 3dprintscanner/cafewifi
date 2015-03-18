@@ -11,6 +11,7 @@
                           <li> <%= venue.address %> </li>
                           <li> <%= venue.address_line_2 %> </li>
                           <li> <%= venue.postcode %> </li>
+                          <li> <%= venue.distance_to(params[:search]).round(3) %> </li>
                         </ul>
                           <%= link_to "Go To Venue Details Page", venue_path(venue.id), class: "btn btn-default" %>
                           <button type="button" class="btn btn-default" onClick="centerMap(<%= venue.longitude %>,<%= venue.latitude %>,handler)">Center on Venue</button>

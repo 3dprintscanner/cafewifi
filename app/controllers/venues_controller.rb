@@ -34,6 +34,19 @@ class VenuesController < ApplicationController
   # GET /venues/1
   # GET /venues/1.json
   def show
+    @venue = Venue.find(params[:id])
+
+    if @venue && @venue.venue_data
+      attributes = @venue.venue_data.attributes
+      attributes.delete("created_at")
+      attributes.delete("updated_at")
+      attributes.delete("venue_id")
+
+      @venue_data=attributes
+
+      # puts @venue_data.class
+    end
+
   end
 
   # GET /venues/new

@@ -10,6 +10,8 @@ class Venue < ActiveRecord::Base
 	geocoded_by :address
 	after_validation :geocode, if: ->(obj){ !obj.longitude.present? || !obj.latitude.present?}
 	has_many :reviews
+	belongs_to :venue_data
+	has_one :venue_data
 	
 	scope :nearby_places, lambda {|search,limit=50| Venue.search(search,limit)}
 

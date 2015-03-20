@@ -1,10 +1,13 @@
 Cafewifi::Application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   resources :users
 
   resources :reviews
 
   resources :venues
 
+  resources :admin
 
   root to: 'venues#index'
   # The priority is based upon order of creation: first created -> highest priority.

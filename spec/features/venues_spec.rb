@@ -34,7 +34,6 @@ describe "Adding Venues"  do
 	end
 
 	it "should show that no entries are found near your search location" do
-
 		Venue.create(liverpool_attributes)
 		Venue.create(seattle_attributes)
 		visit '/'
@@ -50,7 +49,8 @@ describe "Adding Venues"  do
 			Venue.create(liverpool_attributes)
 		end
 		visit '/'
-		expect(page).to have_content('Crowne Plaza').times(50)
+		expect(page).to have_content('Crowne Plaza')
+		page.should.have_css?("div result")
 	end
 
 end

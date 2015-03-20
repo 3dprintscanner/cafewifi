@@ -42,6 +42,17 @@
       <li><%= review.review_body %></li>
       <% end %>
   </ul>
+  <ul class="list-group">
+    <li class="list-group-item"><strong>Wifi Upload Speed: <%= @venue.venue_data.wifi_upload_speed %></strong></li>
+    <li class="list-group-item"><strong>Wifi Download Speed: <%= @venue.venue_data.wifi_download_speed %></strong></li>
+    <li class="list-group-item"><strong>Signal Strength: <%= @venue.venue_data.signal_strength %></strong></li>
+  </ul>
+  <ul class="list-group">
+    <% @venue.venue_data.attributes.each do |attribute| %>
+      <li class="list-group-item"><strong><%= attribute[0] %>:</strong> <%= attribute[1] %></li>
+    <% end %>
+  </ul>
+
       </div>
   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       <div class="row">
@@ -51,6 +62,10 @@
                 </div></div>    
 </div>
 
+<%= @venue.venue_data.wifi_download_speed %>
+<%= @venue.venue_data.signal_strength %>
+<%= @venue.venue_data.charging_sockets %>
+<%= @venue.venue_data.number_of_tables %>
 
 <%= link_to "Write a Review", new_review_path %>
 

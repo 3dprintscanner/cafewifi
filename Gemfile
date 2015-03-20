@@ -51,6 +51,12 @@ gem 'bootstrap-sass', '~> 3.3.3'
 
 gem 'kaminari'
 
+# Add admin interface gem
+
+gem 'activeadmin', github: 'activeadmin'
+
+gem 'devise'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

@@ -14,7 +14,9 @@
             <%= link_to 'Download Local Venues', venues_path(params.merge({format: "json"})), class: "btn btn-warning" %>
           </div>
           <div class="panel-body">
-            <%= paginate @venues %>
+            <div class="row">
+              <%= paginate @venues %>  
+            </div>
             <div class="resultcontainer">
                   <%= render 'venues' , venues: @venues %>
                 </div>

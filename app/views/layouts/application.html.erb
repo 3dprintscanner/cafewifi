@@ -19,10 +19,22 @@
 			<%= link_to 'Home', venues_path %>
 		</li>
 		<li>
-			<%= link_to "My Account", users_path %>
+			<%= link_to "My Account" %>
 		<li>
 			<% flash.each do |type, message| %>
   				<%= content_tag :div, message, :class => "flash #{type}" %>
+			<% end %>
+		</li>
+	</ul>
+	<ul class="">
+		<li>
+			<%= link_to "My Account" %>
+		</li>
+		<li>
+			<% if user_signed_in? %>
+				<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+			<% else %>
+				<%= link_to "Sign In", new_user_session_path %>
 			<% end %>
 		</li>
 	</ul>

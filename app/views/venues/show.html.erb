@@ -37,9 +37,12 @@
   </p>
   <strong>Data:</strong>
   <ul class="list-group">
-    <% @venue_data.each do |attribute| %>
-      <li class="list-group-item"><strong><%= attribute[0] %>:</strong> <%= attribute[1] %></li>
+    <% if @venue_data  %>
+      <% @venue_data.each do |attribute| %>
+        <li class="list-group-item"><strong><%= attribute[0] %>:</strong> <%= attribute[1] %></li>
+      <% end %>  
     <% end %>
+    
   </ul>
 
   <strong>Reviews:</strong>
@@ -56,8 +59,10 @@
           <div id='gmapuniq'></div>
         </div>    
                 </div></div>    
+<% if user_signed_in?  %>
+  <%= link_to "Write a Review", new_review_path %>  
+<% end %>
 
-<%= link_to "Write a Review", new_review_path %>
 
 <div class="row">
 <div class='col-md-9'>

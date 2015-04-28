@@ -22,8 +22,8 @@
                             <p><%= venue.address_line_2 %></p>
                             <p><%= venue.postcode %></p>
                             <span><h4>Distance To:</h4></span>
-                            <!-- <p><%= venue.distance_to(params[:search]).round(3) %></p> -->
-                            1
+                            <p><%= venue.distance_to(params[:search]).round(3) %></p>
+                            
                           </div>
                         </div>
                           <%= link_to "Go To Venue Details", venue_path(venue.id), class: "btn btn-info" %>

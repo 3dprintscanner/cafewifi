@@ -1,11 +1,16 @@
 <br>
 <div class="contentcontainer">
   <%= link_to 'New Venue', new_venue_path %>
-  <div class ="row">
-    <div class='col-md-3'>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       <div class="row searchbox">
         <%= render 'search' %>  
-      </div>
+      </div>  
+    </div>
+  </div>
+  <div class ="row">
+    <div class='col-md-3'>
+      
       <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title"><%= @search_presentation_string %></h3>

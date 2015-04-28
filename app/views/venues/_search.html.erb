@@ -13,20 +13,32 @@
 <%= form_tag venues_path, :method => 'get' do %>
 <p>
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Find Wifi Enabled Venues Near ...", oninput:"autoComplete2()" %>  
-    </div>   
-  </div>
-  <br>
-  <div class="row">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><%= select_tag :per, options_for_select([10,25,50,100,500,"all"]), {class: "form-control"} %></div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><%= select_tag :per, options_for_select([10,25,50,100,500,"all"]), {class: "form-control"} %></div>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
         <%= submit_tag "Search", :name => nil, class:"btn btn-primary" %>
         <%= link_to "Clear Search", venues_path, class: "btn btn-warning" %>
-      </div>  
+      </div>   
   </div>
+  <div class="row">
+    <%= check_box_tag 'charging_sockets', 'true', params[:charging_sockets] %> 
+    <%= label_tag 'Charging Sockets' %>
+    <%= check_box_tag 'food_served', 'true', params[:food_served] %> 
+    <%= label_tag 'Food Served' %>
+    <%= check_box_tag 'tables', 'true', params[:tables] %> 
+    <%= label_tag 'tables' %>
+    <%= check_box_tag 'quiet', 'true', params[:quiet] %> 
+    <%= label_tag 'Quiet' %>
+    <%= check_box_tag 'free_wifi', 'true', params[:free_wifi] %> 
+    <%= label_tag 'Free Wifi' %>
+  </div>
+
 </p>
 <% end %>
+
+
 
 <script>
  function codeAddress() {

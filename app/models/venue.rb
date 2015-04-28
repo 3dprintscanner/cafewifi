@@ -8,10 +8,11 @@ class Venue < ActiveRecord::Base
 	validates :longitude, uniqueness: true
 
 	geocoded_by :address
-	after_validation :geocode, if: ->(obj){ !obj.longitude.present? || !obj.latitude.present?}
+	before_validation :geocode, if: ->(obj){ !obj.longitude.present? || !obj.latitude.present?}
 	has_many :reviews
 	belongs_to :venue_data
 	has_one :venue_data
+	belongs_to :user
 	
 	scope :nearby_places, lambda {|search,limit=50| Venue.search(search,limit)}
 

@@ -60,26 +60,31 @@ class VenuesController < ApplicationController
 
   # GET /venues/1/edit
   def edit
-    if user_signed_in?
+    if user_signed_in? && @venue.user == current_user
       render action: 'edit'
     else
-      redirect_to venues_path, notice: "You need to be signed in"
+      redirect_to venues_path, notice: "You do not have permission to edit this record"
     end
   end
 
   # POST /venues
   # POST /venues.json
   def create
-    @venue = Venue.new(venue_params)
+    if user_signed_in?
+      # @venue = Venue.new(venue_params)
+      @venue = current_user.venues.new(venue_params)
 
-    respond_to do |format|
-      if @venue.save
-        format.html { redirect_to @venue, notice: 'Venue was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @venue }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @venue.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @venue.save
+          format.html { redirect_to @venue, notice: 'Venue was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @venue }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @venue.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to venues_path, notice: "You need to be signed in"
     end
   end
 

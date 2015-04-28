@@ -11,7 +11,7 @@ class VenueDataController < ApplicationController
 	private
 
 	def venue_data_params
-		params.require(:venue_data).permit(:wifi_upload_speed, :wifi_download_speed, :signal_strength, :charging_sockets, :number_of_tables, :venue_id, :password_required, :password_type, :spend_required, :minimum_acceptable_spend)
+		params.require(:venue_data).permit(:wifi_upload_speed, :rating, :wifi_download_speed, :signal_strength, :charging_sockets, :number_of_tables, :venue_id, :password_required, :password_type, :spend_required, :minimum_acceptable_spend)
 	end
 
 end

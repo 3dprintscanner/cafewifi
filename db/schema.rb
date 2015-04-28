@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150427234011) do
+ActiveRecord::Schema.define(version: 20150428013512) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20150427234011) do
     t.float    "minimum_acceptable_spend"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "rating"
   end
 
   add_index "venue_data", ["venue_id"], name: "index_venue_data_on_venue_id"

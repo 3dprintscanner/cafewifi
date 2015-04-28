@@ -15,6 +15,7 @@ class Venue < ActiveRecord::Base
 	
 	scope :nearby_places, lambda {|search,limit=50| Venue.search(search,limit)}
 
+
 	def self.search(search,limit=50)
 		
 		if search

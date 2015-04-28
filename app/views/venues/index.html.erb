@@ -1,6 +1,5 @@
 <br>
 <div class="contentcontainer">
-  <%= link_to 'New Venue', new_venue_path %>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       <div class="row searchbox">
@@ -9,7 +8,7 @@
     </div>
   </div>
   <div class ="row">
-    <div class='col-md-3'>
+    <div class='col-md-4'>
       
       <div class="panel panel-default">
           <div class="panel-heading">
@@ -17,6 +16,10 @@
           </div>
           <div class="panel-heading">
             <%= link_to 'Download Local Venues', venues_path(params.merge({format: "json"})), class: "btn btn-warning" %>
+            <% if user_signed_in? %>
+              <%= link_to 'New Venue', new_venue_path, class: "btn btn-primary" %>  
+            <% end %>
+            
           </div>
           <div class="panel-body">
             <div class="row">
@@ -28,7 +31,7 @@
           </div>
       </div>
     </div>
-    <div class="col-md-9"><div class ='gmap'>
+    <div class="col-md-8"><div class ='gmap'>
         <div id='gmapuniq'></div>
     </div>
     </div>

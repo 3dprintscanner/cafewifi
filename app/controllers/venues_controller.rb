@@ -51,11 +51,20 @@ class VenuesController < ApplicationController
 
   # GET /venues/new
   def new
-    @venue = Venue.new
+    if user_signed_in?
+      @venue = Venue.new
+    else
+      redirect_to venues_path, notice: "You need to be signed in"
+    end
   end
 
   # GET /venues/1/edit
   def edit
+    if user_signed_in?
+      render action: 'edit'
+    else
+      redirect_to venues_path, notice: "You need to be signed in"
+    end
   end
 
   # POST /venues
@@ -112,6 +121,6 @@ class VenuesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def venue_params
-      params.require(:venue).permit(:name, :free_wifi, :charging, :website, :latitude, :longitude, :address, :search, :prettyaddress, :address_line_2, :postcode, :offset, :page)
+      params.require(:venue).permit(:name, :free_wifi, :charging, :website, :latitude, :longitude, :address, :search, :prettyaddress, :address_line_2, :postcode, :offset, :page, :rating)
     end
 end

@@ -1,77 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-
-  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <p>
-    <strong>Name:</strong>
-    <%= @venue.name %>
-  </p>
-
-  <p>
-    <strong>Free wifi:</strong>
-    <%= @venue.free_wifi %>
-  </p>
-
-  <p>
-    <strong>Charging:</strong>
-    <%= @venue.charging %>
-  </p>
-
-  <p>
-    <strong>Website:</strong>
-    <%= @venue.website %>
-  </p>
-
-  <p>
-    <strong>Latitude:</strong>
-    <%= @venue.latitude %>
-  </p>
-
-  <p>
-    <strong>Longitude:</strong>
-    <%= @venue.longitude %>
-  </p>
-  <p>
-    <strong>Address:</strong>
-    <%= @venue.address %>
-  </p>
-  <strong>Data:</strong>
-  <ul class="list-group">
-    <% if @venue_data  %>
-      <% @venue_data.each do |attribute| %>
-        <li class="list-group-item"><strong><%= attribute[0] %>:</strong> <%= attribute[1] %></li>
-      <% end %>  
-    <% end %>
+<div class="container">
+  <div class="row class show-header">
     
-  </ul>
-
-  <strong>Reviews:</strong>
-  <ul class ="list-group">
-    <% @venue.reviews.each do |review| %>
-      <li class ="list-group-item"><%= review.review_body %></li>
+  </div>
+  <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+    <div class="row">
+      <div>
+        <div id='map-container'></div>
+      </div>    
+    </div>
+    <div class="row reviews-container">
+      <% if @venue.reviews %>
+        <ul class="list-group">
+          <% @venue.reviews.each do |review| %>
+            <li class='list-group-item'><p><%= render 'review', review: review %></p></li>
+          <% end %>
+        </ul>  
       <% end %>
-  </ul>
+    </div>
+  </div>
+  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 info-container">
+    <ul class="list-group">
+      <li class="list-group-item"><%= label_tag('Name: ') %>  <%= @venue.name %></li>
+      <li class="list-group-item"><%= label_tag('Address: ') %><%= @venue.prettyaddress %></li>
+      <li class="list-group-item"><%= label_tag('Upload Speed: ') %><%= @venue.venue_data.wifi_upload_speed %></li>
+      <li class="list-group-item"><%= label_tag('Download Speed: ') %><%= @venue.venue_data.wifi_download_speed %></li>
+    </ul>
+  </div>
+</div>
 
-      </div>
-  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <div class="row">
-        <div class ='gmap'>
-          <div id='gmapuniq'></div>
-        </div>    
-                </div></div>    
+       
 <% if user_signed_in?  %>
   <%= link_to "Write a Review", new_review_path %>  
 <% end %>
-
-
-<div class="row">
-<div class='col-md-9'>
-    
-    <div id='location'>This is the location</div>
-  </div>
-</div>
-<br>
-<br>
 
 <%= link_to 'Edit', edit_venue_path(@venue) %> |
 <%= link_to 'Back', venues_path %>
@@ -79,7 +41,7 @@
 
 $(document).ready(function(){
   handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'gmapuniq'}}, function(){
+  handler.buildMap({ provider: {}, internal: {id: 'map-container'}}, function(){
   markers = handler.addMarkers([
     {
       "lat": <%= @venue.latitude %>,

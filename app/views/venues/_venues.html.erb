@@ -1,24 +1,24 @@
 <% venues.each_with_index do |venue,index| %>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 venue">
+                      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <div class="row">
-                          <%= image_tag('placeholder.png') %> 
+                          <%= image_tag('http://placehold.it/96x96', size: "96x96") %> 
                         </div>
-                        <%= link_to "Venue Details", venue_path(venue.id), class: "btn btn-info" %>
-                        <button type="button" class="btn btn-primary" onClick="centerMap(<%= venue.longitude %>,<%= venue.latitude %>,handler)">Center</button>
                       </div>
-                      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                        <div class="row">
-                          <span class="venue-title"><h4><%= "#{index}. #{venue.name}" %></h4></span>  
+                      <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                          <div class="row">
+                            <span class="venue-title"><%= " #{venue.name}" %></span>  
+                          </div>
+                            <% if venue.venue_data %>
+                                <%= render 'stars', stars: venue.venue_data.rating %>                           
+                                <%= render 'facilities', facilities: venue %>
+                            <% end %>   
                         </div>
-                          <% if venue.venue_data %>
-                            <div class="row">
-                              <%= render 'stars', stars: venue.venue_data.rating %>                           
-                            </div>
-                            <div class="row">
-                              <%= render 'facilities', facilities: venue %>
-                            </div>
-                          <% end %> 
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 button-holder">
+                          <%= link_to "Details", venue_path(venue.id), class: "btn btn-info venue-details" %>
+                          <button type="button" class="btn btn-primary venue-details" onClick="centerMap(<%= venue.longitude %>,<%= venue.latitude %>,handler)">Center</button>
+                        </div>
                       </div>
                     </div>
                   <% end %>

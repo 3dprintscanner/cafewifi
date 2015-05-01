@@ -1,13 +1,13 @@
 <% if facilities %>
 	<div class="row">
 		<% if facilities.free_wifi? == true  %>
-			<%= image_tag('wifi_icon.png') %>
+			<%= image_tag('wifi_icon.png', size: '16x16') %>
 		<% end %>
 		<% if facilities.venue_data.charging_sockets != nil  %>
-			<%= image_tag('power_icon.png') %>
+			<%= image_tag('power_icon.png', size: '16x16') %>
 		<% end %>
 		<% if facilities.venue_data.number_of_tables != nil %>
-			<%= image_tag('table_icon.png') %>
+			<%= image_tag('table_icon.png', size: '16x16') %>
 		<% end %>
 	</div>
 <% end %>

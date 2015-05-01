@@ -1,10 +1,10 @@
 <div class="row">
 	<% if stars %>
 		<% stars.times do |star| %>
-			<span class="star"><%= image_tag('star.png') %></span>	
+			<span class="star"><%= image_tag('star.png', size: "16x16") %></span>	
 		<% end %>
 		<% (5-stars).times do |star| %>
-			<span class="star"><%= image_tag('clear_star.png') %></span>	
+			<span class="star"><%= image_tag('clear_star.png', size: "16x16") %></span>	
 		<% end %>	
 	<% end %>
 	

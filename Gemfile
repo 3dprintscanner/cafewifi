@@ -57,6 +57,12 @@ gem 'activeadmin', github: 'activeadmin'
 
 gem 'devise'
 
+
+source 'https://rails-assets.org' do
+	gem 'rails-assets-openlayers3'
+end
+
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -64,7 +70,8 @@ end
 
 group :development, :test do
 	gem 'capybara'
-	gem 'rspec-rails'
+	# gem 'rspec-rails'
+	gem 'rspec-rails', '~> 2.14.0.rc1'
 	gem 'shoulda-matchers'
 	# gem 'factory-girl'
 	gem 'pry'

@@ -14,18 +14,19 @@ class Venue < ActiveRecord::Base
 	has_one :venue_data
 	belongs_to :user
 	
-	scope :nearby_places, lambda {|search,limit=50| Venue.search(search,limit)}
+	scope :nearby_places, lambda {|search,limit=50,distance=10| Venue.search(search,limit,distance)}
 
 
-	def self.search(search,limit=50)
+	def self.search(search,limit=50,distance=10)
 		
 		if search
 			# find(:all, :conditions => ['name LIKE ? OR address LIKE ?', "%#{search}%" ])
 			#Venue.where("name LIKE ? OR address LIKE ?", search, search)
 			# Venue.near(search)
-			Venue.near(search)
+			Venue.near(search,distance)
 		else
 			Venue.all
+
 		end
 	end
 

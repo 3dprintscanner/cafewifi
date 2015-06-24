@@ -26,12 +26,12 @@ describe "Adding Venues"  do
 	it "should not show an entry that is not close to the search location" do
 		Venue.create(liverpool_attributes)
 		Venue.create(seattle_attributes)
-		visit '/'
+		visit '/'											
 		fill_in 'search', with: "Liverpool"
 		click_link("Search")
 		expect(page).to_not have_content("No places match your query")
 		expect(page).to_not have_content("The Paramount Hotel Seattle")
-	end
+	end																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																											
 
 	it "should show that no entries are found near your search location" do
 		Venue.create(liverpool_attributes)

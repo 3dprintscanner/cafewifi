@@ -4,39 +4,42 @@
   <div class="row class show-header">
     
   </div>
-  <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-    <div class="row">
-      <div>
-        <div id='map-container'></div>
-      </div>    
+  <div class="row">
+    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+      <div class="row">
+        <div>
+          <div id='map-container'></div>
+        </div>
+      </div>
+      <div class="row reviews-container">
+        <% if @venue.reviews %>
+            <ul class="list-group">
+              <% @venue.reviews.each do |review| %>
+                  <li class='list-group-item'><p><%= render 'review', review: review %></p></li>
+              <% end %>
+            </ul>
+        <% end %>
+      </div>
     </div>
-    <div class="row reviews-container">
-      <% if @venue.reviews %>
-        <ul class="list-group">
-          <% @venue.reviews.each do |review| %>
-            <li class='list-group-item'><p><%= render 'review', review: review %></p></li>
-          <% end %>
-        </ul>  
-      <% end %>
+    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 info-container">
+      <ul class="list-group">
+        <li class="list-group-item"><%= label_tag('Name: ') %>  <%= @venue.name %></li>
+        <li class="list-group-item"><%= label_tag('Address: ') %><%= @venue.prettyaddress %></li>
+        <li class="list-group-item"><%= label_tag('Upload Speed: ') %><%= @venue.venue_data.wifi_upload_speed %></li>
+        <li class="list-group-item"><%= label_tag('Download Speed: ') %><%= @venue.venue_data.wifi_download_speed %></li>
+      </ul>
     </div>
   </div>
-  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 info-container">
-    <ul class="list-group">
-      <li class="list-group-item"><%= label_tag('Name: ') %>  <%= @venue.name %></li>
-      <li class="list-group-item"><%= label_tag('Address: ') %><%= @venue.prettyaddress %></li>
-      <li class="list-group-item"><%= label_tag('Upload Speed: ') %><%= @venue.venue_data.wifi_upload_speed %></li>
-      <li class="list-group-item"><%= label_tag('Download Speed: ') %><%= @venue.venue_data.wifi_download_speed %></li>
-    </ul>
+  <div class="row">
+    <% if user_signed_in?  %>
+        <%= link_to "Write a Review", new_review_path %>
+    <% end %>
+    <%= link_to 'Edit', edit_venue_path(@venue), class: "btn" %>
+    <%= link_to 'Back', venues_path, class: "btn" %>
   </div>
 </div>
 
        
-<% if user_signed_in?  %>
-  <%= link_to "Write a Review", new_review_path %>  
-<% end %>
-
-<%= link_to 'Edit', edit_venue_path(@venue) %> |
-<%= link_to 'Back', venues_path %>
 <script>
 
 $(document).ready(function(){

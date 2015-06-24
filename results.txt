@@ -1,0 +1,5 @@
+/home/anthony/.rvm/gems/ruby-2.2.0/gems/rails-assets-openlayers3-3.0.0/app/assets/javascripts/openlayers3
+/home/anthony/.rvm/gems/ruby-2.2.0/gems/rails-assets-openlayers3-3.0.0/app/assets/images/openlayers3
+/home/anthony/.rvm/gems/ruby-2.2.0/gems/rails-assets-openlayers3-3.0.0/app/assets/fonts/openlayers3
+/home/anthony/.rvm/gems/ruby-2.2.0/gems/rails-assets-openlayers3-3.0.0/app/assets/documents/openlayers3
+/home/anthony/.rvm/gems/ruby-2.2.0/gems/rails-assets-openlayers3-3.0.0/app/assets/stylesheets/openlayers3

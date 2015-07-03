@@ -73,8 +73,9 @@ group :development, :test do
 	# gem 'rspec-rails'
 	gem 'rspec-rails', '~> 2.14.0.rc1'
 	gem 'shoulda-matchers'
-	# gem 'factory-girl'
+	gem 'factory_girl_rails'
 	gem 'pry'
+	gem 'ZenTest'
 end
 
 

@@ -35,20 +35,25 @@ describe Venue do
   			expect(venue).to_not be_valid
   		end
 
-  		it "should reject an entry with neither longitude nor latitude" do
-  			venue.latitude = nil
-  			venue.longitude = nil
-  			expect(venue).to_not be_valid
+  		it "should geocode an entry with neither longitude nor latitude" do
+        newAttributes = valid_attributes
+        newAttributes["latitude"] = nil
+        newAttributes["longitude"] = nil
+
+        newVenue = Venue.create(newAttributes)
+
+  			expect(venue["latitude"]).to_not be_nil
+        expect(venue["longitude"]).to_not be_nil
   		end
 
-      it "should only return the first 50 with a limit parameter" do
-        3.times do |lat|
-          valid_attributes['latitude'] =+ (lat*0.1)
-          valid_attributes['longitude'] =+ (lat*0.1)
+      it "should only return the first 50 with a limit parameter" do            
           Venue.create(valid_attributes)
-        end
+          newAttributes = valid_attributes
+          newAttributes["latitude"] = 35
+          newAttributes["longitude"] = 12
+          binding.pry
           puts Venue.all.to_json
-          expect(Venue.search('Liverpool',1).count).to eq(1)
+          expect(Venue.search('Liverpool').count).to eq(1)
       end
   	end
   end
